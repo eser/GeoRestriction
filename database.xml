@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sql>
+	<name>GeoRestrion</name>
+	<version>1.0</version>
+	<license>Open Source MIT license</license>
+
+	<tables>
+
+		<query>
+			CREATE TABLE IF NOT EXISTS module_georestriction_location (
+				id_location INT(11) UNSIGNED NOT NULL AUTO_INCREMENT,
+				shortname VARCHAR(5) NOT NULL,
+				name VARCHAR(255) NOT NULL,
+				PRIMARY KEY (id_location)
+			)
+			ENGINE = InnoDB
+			AUTO_INCREMENT = 1
+			DEFAULT CHARACTER SET = utf8
+			COLLATE = utf8_unicode_ci;
+		</query>
+
+		<query>
+			CREATE TABLE IF NOT EXISTS module_georestriction_links (
+				parent CHAR(25) NOT NULL,
+				id_parent INT(11) UNSIGNED NOT NULL,
+				id_location INT UNSIGNED NOT NULL,
+				ordering INT(11) UNSIGNED NULL DEFAULT 9999,
+				PRIMARY KEY (parent,id_parent,id_location)
+			)
+			ENGINE = InnoDB
+			DEFAULT CHARACTER SET = utf8
+			COLLATE = utf8_unicode_ci;
+		</query>
+		
+	</tables>
+
+	<content>
+	
+		<query>
+			INSERT IGNORE INTO module_georestriction_location (id_location, shortname, name)
+			VALUES
+			(1, 'us', 'USA'),
+			(2, 'gb', 'Britain'),
+			(3, 'tr', 'Turkey');
+		</query>
+
+	</content>
+</sql>
